@@ -13,9 +13,20 @@ export default class BudgetPage extends Component{
 
     let categories = budget_categories.map((category,index)=>{
       return(
-        <div style={{border:'1px solid red',margin:'10px'}} key={index}>
+        <div key={index}>
           <p style={{backgroundColor:'black',color:'white'}}>{category.category}</p>
-          {this.renderItems(category.id)}
+          <table>
+            <thead>
+              <tr className="tr-border">
+                <th>Item</th>
+                <th>Budgeted Amount</th>
+                <th>Actual Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+                {this.renderItems(category.id)}
+            </tbody>
+          </table>
         </div>
       )
     })
@@ -28,12 +39,11 @@ export default class BudgetPage extends Component{
     let items = budget_items.map((item,index)=>{
       if(item.category_id===categoryId){
         return(
-          <div style={{display:'flex'}}>
-            <p>{item.item}</p>
-            <p>{item.budgeted_amt.toFixed(2)}</p>
-            <p>{item.spent_amt.toFixed(2)}</p>
-          </div>
-          
+          <tr key={index}>
+              <td>{item.item}</td>
+              <td>{item.budgeted_amt.toFixed(2)}</td>
+              <td>{item.spent_amt.toFixed(2)}</td>
+          </tr>          
         )
       }
     })
